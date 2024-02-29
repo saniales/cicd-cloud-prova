@@ -1,0 +1,30 @@
+version: "3"
+services:
+  mariadb-locale:
+    container_name: mariadb-locale
+    image: mariadb:10
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - rete-interna
+
+  express-locale:
+    container_name: express-locale
+    build: .
+    restart: always
+    ports:
+      - "3000:3000"
+    networks:
+      - rete-interna
+
+volumes:
+  db-data:
+
+networks:
+  rete-interna:
+    
